@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="UART_tx_behavior_sim.wdb" id="1">
+         <top_modules>
+            <top_module name="std" />
+            <top_module name="tb_UART_tx" />
+            <top_module name="tb_UART_tx_pkg" />
+            <top_module name="uart_pkg" />
+            <top_module name="uvm_pkg" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0.000000 us"></ZoomStartTime>
+      <ZoomEndTime time="567.500001 us"></ZoomEndTime>
+      <Cursor1Time time="216.320000 us"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="105"></NameColumnWidth>
+      <ValueColumnWidth column_width="58"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="16" />
+   <wvobject type="divider" fp_name="divider49">
+      <obj_property name="label">Control</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_UART_tx/dut/tx/u_tx_controller/cstate" type="array">
+      <obj_property name="ElementShortName">cstate[3:0]</obj_property>
+      <obj_property name="ObjectShortName">cstate[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_UART_tx/dut/tx/u_tx_controller/cnt_nrst" type="logic">
+      <obj_property name="ElementShortName">cnt_nrst</obj_property>
+      <obj_property name="ObjectShortName">cnt_nrst</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_UART_tx/dut/tx/u_tx_controller/cnt" type="array">
+      <obj_property name="ElementShortName">cnt[3:0]</obj_property>
+      <obj_property name="ObjectShortName">cnt[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_UART_tx/dut/tx/u_tx_controller/tx_cnt" type="array">
+      <obj_property name="ElementShortName">tx_cnt[2:0]</obj_property>
+      <obj_property name="ObjectShortName">tx_cnt[2:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_UART_tx/dut/tx/u_tx_controller/tx_clk" type="logic">
+      <obj_property name="ElementShortName">tx_clk</obj_property>
+      <obj_property name="ObjectShortName">tx_clk</obj_property>
+   </wvobject>
+   <wvobject type="divider" fp_name="divider50">
+      <obj_property name="label">output</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_UART_tx/dut/tx/u_tx_controller/cstate" type="array">
+      <obj_property name="ElementShortName">cstate[3:0]</obj_property>
+      <obj_property name="ObjectShortName">cstate[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_UART_tx/dut/tx/indata" type="array">
+      <obj_property name="ElementShortName">indata[7:0]</obj_property>
+      <obj_property name="ObjectShortName">indata[7:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_UART_tx/dut/tx/enable" type="logic">
+      <obj_property name="ElementShortName">enable</obj_property>
+      <obj_property name="ObjectShortName">enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_UART_tx/dut/tx/u_tx_controller/tx_clk" type="logic">
+      <obj_property name="ElementShortName">tx_clk</obj_property>
+      <obj_property name="ObjectShortName">tx_clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_UART_tx/dut/tx/shift_buf" type="array">
+      <obj_property name="ElementShortName">shift_buf[7:0]</obj_property>
+      <obj_property name="ObjectShortName">shift_buf[7:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_UART_tx/dut/tx/send" type="logic">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">send</obj_property>
+      <obj_property name="ObjectShortName">send</obj_property>
+      <obj_property name="label">se/tb_UART_tx/dut/tx/sendnd</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_UART_tx/dut/tx/state_bit" type="logic">
+      <obj_property name="ElementShortName">state_bit</obj_property>
+      <obj_property name="ObjectShortName">state_bit</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_UART_tx/dut/txd" type="logic">
+      <obj_property name="ElementShortName">txd</obj_property>
+      <obj_property name="ObjectShortName">txd</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_UART_tx/dut/tx/u_tx_controller/nstate_trigger" type="logic">
+      <obj_property name="ElementShortName">nstate_trigger</obj_property>
+      <obj_property name="ObjectShortName">nstate_trigger</obj_property>
+   </wvobject>
+</wave_config>

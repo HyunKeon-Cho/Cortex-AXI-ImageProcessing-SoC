@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="UART_rx_behavior_sim.wdb" id="1">
+         <top_modules>
+            <top_module name="std" />
+            <top_module name="tb_UART_rx" />
+            <top_module name="tb_UART_rx_pkg" />
+            <top_module name="uart_pkg" />
+            <top_module name="uvm_pkg" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="845.166667 us"></ZoomStartTime>
+      <ZoomEndTime time="1,906.166668 us"></ZoomEndTime>
+      <Cursor1Time time="1,022.000000 us"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="155"></NameColumnWidth>
+      <ValueColumnWidth column_width="60"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="14" />
+   <wvobject type="divider" fp_name="divider11">
+      <obj_property name="label">top</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_UART_rx/dut/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_UART_rx/dut/oclk" type="logic">
+      <obj_property name="ElementShortName">oclk</obj_property>
+      <obj_property name="ObjectShortName">oclk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_UART_rx/dut/nrst" type="logic">
+      <obj_property name="ElementShortName">nrst</obj_property>
+      <obj_property name="ObjectShortName">nrst</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_UART_rx/dut/rx/controller/cstate" type="array">
+      <obj_property name="ElementShortName">cstate[3:0]</obj_property>
+      <obj_property name="ObjectShortName">cstate[3:0]</obj_property>
+      <obj_property name="CustomSignalColor">#FAAFBE</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_UART_rx/dut/rxd" type="logic">
+      <obj_property name="ElementShortName">rxd</obj_property>
+      <obj_property name="ObjectShortName">rxd</obj_property>
+      <obj_property name="CustomSignalColor">#FFFF00</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_UART_rx/dut/rx/bd_detected_data" type="logic">
+      <obj_property name="ElementShortName">bd_detected_data</obj_property>
+      <obj_property name="ObjectShortName">bd_detected_data</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_UART_rx/dut/rx/controller/enable" type="logic">
+      <obj_property name="ElementShortName">enable</obj_property>
+      <obj_property name="ObjectShortName">enable</obj_property>
+      <obj_property name="CustomSignalColor">#FAAFBE</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_UART_rx/dut/rx_valid" type="logic">
+      <obj_property name="ElementShortName">rx_valid</obj_property>
+      <obj_property name="ObjectShortName">rx_valid</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_UART_rx/dut/rx/bd_fifo" type="array">
+      <obj_property name="ElementShortName">bd_fifo[2:0]</obj_property>
+      <obj_property name="ObjectShortName">bd_fifo[2:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_UART_rx/dut/rx/fifo" type="array">
+      <obj_property name="ElementShortName">fifo[8:0]</obj_property>
+      <obj_property name="ObjectShortName">fifo[8:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_UART_rx/dut/rx/rx_buf" type="array">
+      <obj_property name="ElementShortName">rx_buf[7:0]</obj_property>
+      <obj_property name="ObjectShortName">rx_buf[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_UART_rx/dut/rx/outdata" type="array">
+      <obj_property name="ElementShortName">outdata[7:0]</obj_property>
+      <obj_property name="ObjectShortName">outdata[7:0]</obj_property>
+      <obj_property name="CustomSignalColor">#FFFF00</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_UART_rx/dut/rx/valid" type="logic">
+      <obj_property name="ElementShortName">valid</obj_property>
+      <obj_property name="ObjectShortName">valid</obj_property>
+      <obj_property name="CustomSignalColor">#FFFF00</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+</wave_config>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="rx_controller_sim.wdb" id="1">
+         <top_modules>
+            <top_module name="tb_rx_controller" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0.000 ns"></ZoomStartTime>
+      <ZoomEndTime time="1,812.001 ns"></ZoomEndTime>
+      <Cursor1Time time="845.000 ns"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="264"></NameColumnWidth>
+      <ValueColumnWidth column_width="128"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="29" />
+   <wvobject fp_name="/tb_rx_controller/nrst" type="logic">
+      <obj_property name="ElementShortName">nrst</obj_property>
+      <obj_property name="ObjectShortName">nrst</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_rx_controller/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="divider" fp_name="divider27">
+      <obj_property name="label">PARAM</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_rx_controller/clk_period" type="array">
+      <obj_property name="ElementShortName">clk_period[31:0]</obj_property>
+      <obj_property name="ObjectShortName">clk_period[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_rx_controller/rx_clk_rate" type="array">
+      <obj_property name="ElementShortName">rx_clk_rate[31:0]</obj_property>
+      <obj_property name="ObjectShortName">rx_clk_rate[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="divider" fp_name="divider28">
+      <obj_property name="label">TB_UART</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_rx_controller/rx_cnt" type="array">
+      <obj_property name="ElementShortName">rx_cnt[31:0]</obj_property>
+      <obj_property name="ObjectShortName">rx_cnt[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_rx_controller/clock_enable" type="logic">
+      <obj_property name="ElementShortName">clock_enable</obj_property>
+      <obj_property name="ObjectShortName">clock_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_rx_controller/rx_clk" type="logic">
+      <obj_property name="ElementShortName">rx_clk</obj_property>
+      <obj_property name="ObjectShortName">rx_clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_rx_controller/start" type="logic">
+      <obj_property name="ElementShortName">start</obj_property>
+      <obj_property name="ObjectShortName">start</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_rx_controller/cnt" type="array">
+      <obj_property name="ElementShortName">cnt[31:0]</obj_property>
+      <obj_property name="ObjectShortName">cnt[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_rx_controller/rx_valid" type="logic">
+      <obj_property name="ElementShortName">rx_valid</obj_property>
+      <obj_property name="ObjectShortName">rx_valid</obj_property>
+   </wvobject>
+   <wvobject type="divider" fp_name="divider13">
+      <obj_property name="label">DUT</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_rx_controller/dut/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_rx_controller/dut/rx_clk" type="logic">
+      <obj_property name="ElementShortName">rx_clk</obj_property>
+      <obj_property name="ObjectShortName">rx_clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_rx_controller/dut/nrst" type="logic">
+      <obj_property name="ElementShortName">nrst</obj_property>
+      <obj_property name="ObjectShortName">nrst</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_rx_controller/dut/start" type="logic">
+      <obj_property name="ElementShortName">start</obj_property>
+      <obj_property name="ObjectShortName">start</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_rx_controller/dut/clock_enable" type="logic">
+      <obj_property name="ElementShortName">clock_enable</obj_property>
+      <obj_property name="ObjectShortName">clock_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_rx_controller/dut/rx_valid" type="logic">
+      <obj_property name="ElementShortName">rx_valid</obj_property>
+      <obj_property name="ObjectShortName">rx_valid</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_rx_controller/dut/cnt" type="array">
+      <obj_property name="ElementShortName">cnt[2:0]</obj_property>
+      <obj_property name="ObjectShortName">cnt[2:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_rx_controller/dut/nstate" type="array">
+      <obj_property name="ElementShortName">nstate[3:0]</obj_property>
+      <obj_property name="ObjectShortName">nstate[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_rx_controller/dut/cstate" type="array">
+      <obj_property name="ElementShortName">cstate[3:0]</obj_property>
+      <obj_property name="ObjectShortName">cstate[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_rx_controller/dut/OVERSAMPLING_RATE" type="array">
+      <obj_property name="ElementShortName">OVERSAMPLING_RATE[31:0]</obj_property>
+      <obj_property name="ObjectShortName">OVERSAMPLING_RATE[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_rx_controller/dut/BITWIDTH" type="array">
+      <obj_property name="ElementShortName">BITWIDTH[31:0]</obj_property>
+      <obj_property name="ObjectShortName">BITWIDTH[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_rx_controller/dut/COUNTER_BITWIDTH" type="array">
+      <obj_property name="ElementShortName">COUNTER_BITWIDTH[31:0]</obj_property>
+      <obj_property name="ObjectShortName">COUNTER_BITWIDTH[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_rx_controller/dut/IDLE" type="array">
+      <obj_property name="ElementShortName">IDLE[3:0]</obj_property>
+      <obj_property name="ObjectShortName">IDLE[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_rx_controller/dut/IN" type="array">
+      <obj_property name="ElementShortName">IN[3:0]</obj_property>
+      <obj_property name="ObjectShortName">IN[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_rx_controller/dut/PROC" type="array">
+      <obj_property name="ElementShortName">PROC[3:0]</obj_property>
+      <obj_property name="ObjectShortName">PROC[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_rx_controller/dut/OUT" type="array">
+      <obj_property name="ElementShortName">OUT[3:0]</obj_property>
+      <obj_property name="ObjectShortName">OUT[3:0]</obj_property>
+   </wvobject>
+</wave_config>

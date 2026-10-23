@@ -2,21 +2,24 @@ module axi_UART #(
     parameter int unsigned BAUD_DIV_INT_WIDTH  = 16,
     parameter int unsigned BAUD_DIV_FRAC_WIDTH = 16,
     parameter int unsigned OVERSAMPLING_RATE = 16
+    parameter int unsigned BITWIDTH = 32;
 ) (
     // ********************************
     // UART Interface
     // ********************************
+    input  logic        aclk,
+    input  logic        aresetn,
     input  logic        uart_rxd,
     output logic        uart_txd,
 
-    
     // RX 
+    input  logic        rx_ready,
     output logic        rx_valid,
     output logic [7:0]  rx_data,
 
     // TX
     output logic        tx_ready,
-    input  logic        tx_wr_en,
+    input  logic        tx_valid,
     input  logic [7:0]  tx_data,
     
     // ********************************
@@ -42,13 +45,88 @@ module axi_UART #(
     output logic        s_axil_rvalid,
     input  logic        s_axil_rready
 );
-// ************************************
-// AXI4-full slave : internal I/O
-// ************************************
 
-FIFO #(
-    
-)
+// ************************************
+// internal port handshake
+// ************************************
+typedef enum logic [1:0] {
+    WAIT        = 2'b01,
+    RUN         = 2'b10
+} state_t;
+
+state_t tx_state;
+logic [7:0] tx_buf;
+logic [7:0] tx_inner_data;
+logic tx_hk;
+logic tx_inner_hk;
+logic tx_inner_valid;
+logic tx_inner_ready;
+
+state_t rx_state;
+logic [7:0] rx_buf;
+logic [7:0] rx_inner_data;
+logic rx_hk;
+logic rx_inner_hk;
+logic rx_inner_valid;
+
+assign tx_hk = tx_valid & tx_ready;
+assign tx_inner_hk = tx_inner_valid & tx_inner_ready;
+assign tx_ready = tx_state[0];
+assign tx_inner_ready = tx_state[1];
+assign tx_data
+
+assign rx_hk = rx_valid & rx_ready;
+assign rx_ready = rx_state[0];
+
+logic [7:0] tx_data8;
+assign rx_data = {1'b0, rx_buf, 23'b0};
+assign tx_data8 = tx_data[7:0];
+
+always_ff @(negedge aclk or negedge aresetn) begin
+    if (!aresetn) begin
+        tx_state <= WAIT;
+    end else begin
+        case (tx_state):
+            WAIT : tx_state <= (tx_hk) ? RUN : WAIT;
+            RUN  : tx_state <= (tx_inner_hk) ? WAIT : RUN;
+            default : tx_state <= WAIT; 
+        endcase
+    end 
+end
+
+always_ff @(negedge aclk or negedge aresetn) begin
+    if (!aresetn) begin
+        rx_state <= RUN;
+    end else begin
+        case (rx_state):
+            WAIT : rx_state <= (rx_hk) ? RUN : WAIT;
+            RUN  : rx_state <= (rx_inner_ready) ? WAIT : RUN;
+            default : rx_state <= RUN; 
+        endcase
+    end 
+end
+
+
+always_ff @(negedge aclk or negedge aresetn) begin
+    if (!aresetn) begin
+        tx_buf <= 0';
+    end else if (tx_inner_hk) begin
+        tx_buf <= tx_data8;
+    end else begin
+        tx_buf <= tx_buf;
+    end
+end
+
+always_ff @(negedge aclk or negedge aresetn) begin
+    if (!aresetn) begin
+        rx_buf <= 0';
+    end else if (rx_inner_ready) begin
+        rx_buf <= rx_inner_data;
+    end else begin
+        rx_buf <= rx_buf;
+    end
+end
+
 
 // ************************************
 // AXI4-Lite : Baud rate register
@@ -58,8 +136,8 @@ logic [BAUD_DIV_FRAC_WIDTH-1:0] baud_div_frac;
 
 // Configuration register block
 axi_lite_reg u_regs (
-    .s_axi_aclk    (s_axi_aclk),
-    .s_axi_aresetn (s_axi_aresetn),
+    .s_axi_aclk    (aclk),
+    .s_axi_aresetn (aresetn),
     .s_axi_awaddr  (s_axil_awaddr),
     .s_axi_awprot  (s_axil_awprot),
     .s_axi_awvalid (s_axil_awvalid),
@@ -90,15 +168,15 @@ top_UART #(
     .BAUD_DIV_FRAC_WIDTH (BAUD_DIV_FRAC_WIDTH),
     .OVERSAMPLING_RATE   (OVERSAMPLING_RATE)
 ) uart (
-    .clk           (s_axi_aclk),
-    .nrst          (s_axi_aresetn),
+    .clk           (aclk),
+    .nrst          (aresetn),
     .rxd      (uart_rxd),
     .txd      (uart_txd),
-    .rx_valid      (rx_valid),
-    .rx_data       (rx_data),
-    .tx_ready      (tx_ready),
-    .tx_wr_en      (tx_wr_en),
-    .tx_data       (tx_data),
+    .rx_valid      (rx_inner_valid),
+    .rx_data       (rx_inner_data),
+    .tx_ready      (tx_inner_ready),
+    .tx_valid      (tx_inner_valid),
+    .tx_data       (tx_inner_data),
     .baud_div_int  (baud_div_int),
     .baud_div_frac (baud_div_frac)
 );

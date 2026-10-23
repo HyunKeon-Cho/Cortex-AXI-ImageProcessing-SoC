@@ -11,11 +11,11 @@ module top_UART #(
     output logic                           txd,
     // RX                      
     output logic                           rx_valid,
-    output logic [BITWIDTH-1:0]                     rx_data,
+    output logic [BITWIDTH-1:0]            rx_data,
     // TX                      
     output logic                           tx_ready,
-    input  logic                           tx_wr_en,
-    input  logic [BITWIDTH-1:0]                     tx_data,
+    input  logic                           tx_valid,
+    input  logic [BITWIDTH-1:0]            tx_data,
     // baud_div_parameter
     input  logic [BAUD_DIV_INT_WIDTH-1:0]  baud_div_int,
     input  logic [BAUD_DIV_FRAC_WIDTH-1:0] baud_div_frac
@@ -52,7 +52,7 @@ UART_tx #(
     .clk    (oclk),
     .nrst   (nrst),
     .indata (tx_data),
-    .wr_en  (tx_wr_en),
+    .wr_en  (tx_valid),
     .ready  (tx_ready),
     .outdata(txd)
 );

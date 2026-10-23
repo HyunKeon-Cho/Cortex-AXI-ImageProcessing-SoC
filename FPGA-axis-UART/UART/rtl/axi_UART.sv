@@ -1,49 +1,49 @@
 module axi_UART #(
     parameter int unsigned BAUD_DIV_INT_WIDTH  = 16,
     parameter int unsigned BAUD_DIV_FRAC_WIDTH = 16,
-    parameter int unsigned OVERSAMPLING_RATE = 16
-    parameter int unsigned BITWIDTH = 32;
+    parameter int unsigned OVERSAMPLING_RATE = 16,
+    parameter int unsigned BITWIDTH = 32
 ) (
     // ********************************
     // UART Interface
     // ********************************
-    input  logic        aclk,
-    input  logic        aresetn,
-    input  logic        uart_rxd,
-    output logic        uart_txd,
+    input  logic                 aclk,
+    input  logic                 aresetn,
+    input  logic                 uart_rxd,
+    output logic                 uart_txd,
 
     // RX 
-    input  logic        rx_ready,
-    output logic        rx_valid,
-    output logic [7:0]  rx_data,
+    input  logic                 rx_ready,
+    output logic                 rx_valid,
+    output logic [BITWIDTH-1:0]  rx_data,
 
     // TX
-    output logic        tx_ready,
-    input  logic        tx_valid,
-    input  logic [7:0]  tx_data,
+    output logic                 tx_ready,
+    input  logic                 tx_valid,
+    input  logic [BITWIDTH-1:0]  tx_data,
     
     // ********************************
     // AXI4-Lite Slave Interface : Baud rate register
     // ********************************
-    input  logic [31:0] s_axil_awaddr,   // Write address
-    input  logic [2:0]  s_axil_awprot,
-    input  logic        s_axil_awvalid,
-    output logic        s_axil_awready,
-    input  logic [31:0] s_axil_wdata,    // Write data
-    input  logic [3:0]  s_axil_wstrb,
-    input  logic        s_axil_wvalid,
-    output logic        s_axil_wready,
-    output logic [1:0]  s_axil_bresp,    // Write response
-    output logic        s_axil_bvalid,
-    input  logic        s_axil_bready,
-    input  logic [31:0] s_axil_araddr,   // Read address
-    input  logic [2:0]  s_axil_arprot,
-    input  logic        s_axil_arvalid,
-    output logic        s_axil_arready,
-    output logic [31:0] s_axil_rdata,    // Read data and response
-    output logic [1:0]  s_axil_rresp,
-    output logic        s_axil_rvalid,
-    input  logic        s_axil_rready
+    input  logic [31:0]          s_axil_awaddr,   // Write address
+    input  logic [2:0]           s_axil_awprot,
+    input  logic                 s_axil_awvalid,
+    output logic                 s_axil_awready,
+    input  logic [31:0]          s_axil_wdata,    // Write data
+    input  logic [3:0]           s_axil_wstrb,
+    input  logic                 s_axil_wvalid,
+    output logic                 s_axil_wready,
+    output logic [1:0]           s_axil_bresp,    // Write response
+    output logic                 s_axil_bvalid,
+    input  logic                 s_axil_bready,
+    input  logic [31:0]          s_axil_araddr,   // Read address
+    input  logic [2:0]           s_axil_arprot,
+    input  logic                 s_axil_arvalid,
+    output logic                 s_axil_arready,
+    output logic [31:0]          s_axil_rdata,    // Read data and response
+    output logic [1:0]           s_axil_rresp,
+    output logic                 s_axil_rvalid,
+    input  logic                 s_axil_rready
 );
 
 // ************************************
@@ -61,32 +61,33 @@ logic tx_hk;
 logic tx_inner_hk;
 logic tx_inner_valid;
 logic tx_inner_ready;
+logic [7:0] tx_data8;
+
+assign tx_hk = tx_valid & tx_ready;
+assign tx_ready = tx_state[0];
+
+assign tx_inner_hk = tx_inner_valid & tx_inner_ready;
+assign tx_inner_valid = tx_state[1];
+assign tx_inner_data = tx_buf;
+
+assign tx_data8 = tx_data[7:0];
 
 state_t rx_state;
 logic [7:0] rx_buf;
 logic [7:0] rx_inner_data;
-logic rx_hk;
-logic rx_inner_hk;
 logic rx_inner_valid;
-
-assign tx_hk = tx_valid & tx_ready;
-assign tx_inner_hk = tx_inner_valid & tx_inner_ready;
-assign tx_ready = tx_state[0];
-assign tx_inner_ready = tx_state[1];
-assign tx_data
+logic rx_hk;
 
 assign rx_hk = rx_valid & rx_ready;
-assign rx_ready = rx_state[0];
+assign rx_valid = rx_state[0];
 
-logic [7:0] tx_data8;
-assign rx_data = {1'b0, rx_buf, 23'b0};
-assign tx_data8 = tx_data[7:0];
+assign rx_data = {'0, rx_buf};
 
-always_ff @(negedge aclk or negedge aresetn) begin
+always_ff @(negedge aclk or negedge aresetn) begin : tx_FSM
     if (!aresetn) begin
         tx_state <= WAIT;
     end else begin
-        case (tx_state):
+        case (tx_state)
             WAIT : tx_state <= (tx_hk) ? RUN : WAIT;
             RUN  : tx_state <= (tx_inner_hk) ? WAIT : RUN;
             default : tx_state <= WAIT; 
@@ -94,33 +95,33 @@ always_ff @(negedge aclk or negedge aresetn) begin
     end 
 end
 
-always_ff @(negedge aclk or negedge aresetn) begin
+always_ff @(negedge aclk or negedge aresetn) begin : rx_FSM
     if (!aresetn) begin
         rx_state <= RUN;
     end else begin
-        case (rx_state):
+        case (rx_state)
             WAIT : rx_state <= (rx_hk) ? RUN : WAIT;
-            RUN  : rx_state <= (rx_inner_ready) ? WAIT : RUN;
+            RUN  : rx_state <= (rx_inner_valid) ? WAIT : RUN;
             default : rx_state <= RUN; 
         endcase
     end 
 end
 
 
-always_ff @(negedge aclk or negedge aresetn) begin
+always_ff @(negedge aclk or negedge aresetn) begin : tx_buffer
     if (!aresetn) begin
-        tx_buf <= 0';
-    end else if (tx_inner_hk) begin
+        tx_buf <= '0;
+    end else if (tx_hk) begin
         tx_buf <= tx_data8;
     end else begin
         tx_buf <= tx_buf;
     end
 end
 
-always_ff @(negedge aclk or negedge aresetn) begin
+always_ff @(negedge aclk or negedge aresetn) begin : rx_buffer
     if (!aresetn) begin
-        rx_buf <= 0';
-    end else if (rx_inner_ready) begin
+        rx_buf <= '0;
+    end else if (rx_inner_valid) begin
         rx_buf <= rx_inner_data;
     end else begin
         rx_buf <= rx_buf;
